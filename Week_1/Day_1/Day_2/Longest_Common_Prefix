@@ -1,29 +1,19 @@
+
 class Solution {
 public:
-    int search(vector<int>& nums, int target) {
-        int low = 0, high = nums.size() - 1;
+    string longestCommonPrefix(vector<string>& strs) {
+        string prefix = strs[0];
 
-        while(low <= high){
-            int mid = low + (high - low)/2;
+        for (int i =1; i < strs.size();i++){
+            while(strs[i].find(prefix)!=0){
+                prefix.pop_back();
 
-            if (nums[mid] ==  target)
-              return mid;
-
-            if(nums[low] <= nums[mid]){
-                if (target >= nums[low] && target < nums[mid])
-                   high = mid -1;
-                else
-                  low = mid + 1;   
-            } 
-            else {
-                if (target > nums[mid] && target <= nums[high])
-                  low = mid +1;
-                else 
-                   high = mid -1;  
-            } 
+                if (prefix.empty()){
+                    return "";
+                }
+            }
         }
-
-        return -1;
+        return prefix;
         
     }
 };
